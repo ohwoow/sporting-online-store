@@ -215,24 +215,24 @@ const quantityButtons = document.querySelectorAll('.quantity__button')
 const quantityInput = document.querySelectorAll('.quantity__input-text')
 
 
+function inputChange(e) {
+	e.preventDefault()
+
+	const input = this.closest('.quantity').querySelector('.quantity__input-text')
+	const direction = this.dataset.direction
+	let newValue;
+
+	if (direction === 'plus') {
+		newValue = parseInt(input.value, 10) + 1
+	} else {
+		newValue = input.value > 1 ? input.value - 1 : 1
+	}
+
+	input.value = newValue
+}
+
 quantityButtons.forEach(btn => {
-
-	btn.addEventListener('click', function () {
-
-		const direction = this.dataset.direction
-		let newValue;
-
-		quantityInput.forEach(item => {
-
-			if (direction === 'plus') {
-				newValue = parseInt(item.value, 10) + 1
-			} else {
-				newValue = item.value > 1 ? item.value - 1 : 1
-			}
-
-			item.value = newValue
-		})
-	})
+  	btn.addEventListener('click', inputChange)
 })
 
 
